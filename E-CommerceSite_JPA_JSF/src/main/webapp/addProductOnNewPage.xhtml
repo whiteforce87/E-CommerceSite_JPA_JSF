@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<body> 
+
+<h:form>
+	 
+
+<div class="card">
+        <h2>Add New Product</h2>
+			<p:selectOneMenu value="#{addProductBean2.catId}" >
+    		<f:selectItems value="#{addProductBean2.categories}"  var="category" itemValue = "#{category.id}" itemLabel="#{category.name}" />
+			</p:selectOneMenu>
+        <div class="p-field p-grid">
+            <div class="p-col">
+                <p:outputLabel for="productName" styleClass="p-col-fixed" style="width:100px"  value="Product Name"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="productName" value="#{addProductBean2.product.name}"/>
+                </div>
+            </div>
+            <div class="p-col">
+                <p:outputLabel for="brand" styleClass="p-col-fixed" style="width:100px"  value="Brand"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="brand" value="#{addProductBean2.product.brand}"/>
+                </div>
+            </div>
+             <div class="p-col">
+                <p:outputLabel for="description" styleClass="p-col-fixed" style="width:100px"  value="Description"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="description" value="#{addProductBean2.product.description}"/>
+                </div>
+            </div>
+            <div class="p-col">
+                <p:outputLabel for="price" styleClass="p-col-fixed" style="width:100px"  value="Price($)"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="price"  value="#{addProductBean2.product.price}"/>
+                </div>
+            </div><br></br>
+            <p:commandButton action="#{addProductBean2.saveProduct()}" value="Add Product">
+				<f:param name="categoryId" value="#{addProductBean2.productCategory.id}" />
+			</p:commandButton>
+        </div>
+</div>
+</h:form><br></br>
+<p:link href="categoryList.xhtml">Go to Category List Page</p:link>
+</body> 
+</html>

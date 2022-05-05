@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">  
+
+<h:head></h:head> 
+<body>
+
+<h1 style="color:lightblue;">All Categories</h1>
+	<h:form>
+		<p:button value="LogIn" href="logIn.xhtml"/>
+		<p:commandButton value="LogOut" action="#{userBean.logOut()}"></p:commandButton>
+	</h:form><br></br>
+<h:outputText value="Welcome Admin" rendered="#{userBean.loggedIn}" style="color:blue"/><br></br><br />
+<p:link  href="addCategory.xhtml" rendered="#{userBean.loggedIn}">Catagory Add Page / </p:link>&nbsp;&nbsp;
+    <p:link  href="addProductOnNewPage.xhtml" rendered="#{userBean.loggedIn}"> Product Add Page / </p:link>&nbsp;&nbsp;
+    <p:link  href="updateCategory.xhtml" rendered="#{userBean.loggedIn}"> Category Update Page</p:link><br></br><br />
+
+<h:form id="categoryForm">
+	
+	<p:dataTable value="#{categoryBean.categories}" var="category"  style="width:70%" editable="true">
+		  
+		<p:ajax event="rowEdit" listener="#{categoryBean.updateCategory}"/>
+		
+		 <p:column headerText="Category Name">
+			
+			<p:cellEditor >
+				<f:facet name="output">
+					<p:link href="list_products_of_category.xhtml?categoryId=#{category.id}" >
+					<h:outputText value="#{category.name}" /></p:link>
+				</f:facet>
+				<f:facet name="input">
+					<p:link href="list_products_of_category.xhtml?categoryId=#{category.id}" onclick="return false"> 
+					<h:inputText value="#{category.name}" /></p:link>
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+			
+			
+ 		<p:column headerText="Add Product" rendered="#{userBean.loggedIn}">
+			<p:link href="addProduct.xhtml?categoryId=#{category.id}">Add Product</p:link>
+		</p:column> 
+		
+		<p:column headerText="Edit Category" rendered="#{userBean.loggedIn}">
+                <p:rowEditor editTitle="Update Category Name" cancelTitle="Cancel Update" saveTitle="Save Update"/>
+         </p:column>  
+         <p:column headerText="Delete" rendered="#{userBean.loggedIn}" >
+             <p:commandButton action="#{categoryBean.deleteCategory(category.id)}" value="Delete"/>
+        </p:column>     
+       
+ 	</p:dataTable>
+</h:form><br></br>
+
+<h:form id="addCategory" rendered="#{userBean.loggedIn}" style="color:red">
+	Enter A New Category Name:<h:inputText value="#{categoryBean.category.name}" /><br/><br></br>
+	<p:commandButton action="#{categoryBean.saveCategory()}" value="Add Category" update=":categoryForm">
+	</p:commandButton>
+</h:form><br />
+
+
+</body> 
+</html>

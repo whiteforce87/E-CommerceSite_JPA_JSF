@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<body> 
+
+	<br></br><h:form id="updateProduct" rendered="#{userBean.loggedIn}" style="color:black">
+		<div class="card">
+        <h2>Product Name: #{updateProductBean.product.name}</h2>
+        <div class="p-field p-grid">
+            <div class="p-col">
+                <p:outputLabel for="productName" styleClass="p-col-fixed" style="width:100px"  value="Product Name"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="productName" value="#{updateProductBean.product.name}" label="updateProductBean.product.name"/>
+                </div>
+            </div>
+            <div class="p-col">
+                <p:outputLabel for="brand" styleClass="p-col-fixed" style="width:100px"  value="Brand"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="brand" value="#{updateProductBean.product.brand}"/>
+                </div>
+            </div>
+             <div class="p-col">
+                <p:outputLabel for="description" styleClass="p-col-fixed" style="width:100px"  value="Description"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="description" value="#{updateProductBean.product.description}"/>
+                </div>
+            </div>
+            <div class="p-col">
+                <p:outputLabel for="price" styleClass="p-col-fixed" style="width:100px"  value="Price"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="price"  value="#{updateProductBean.product.price}"/>
+                </div>
+            </div><br></br>
+            <p:commandButton action="#{updateProductBean.updateProduct()}" value="Update Product">
+           		 <f:param name="categoryId" value="#{updateProductBean.productCategory.id}" />
+			</p:commandButton>
+        </div>
+</div>
+	</h:form>
+</body> 
+</html>

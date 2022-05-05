@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">  
+
+<h:head></h:head> 
+<body> 
+<h:form>
+	<h2 style="color:lightblue;">#{productListBean.productCategory.name} Category Products</h2>
+		<p:dataTable value="#{productListBean.products}" var="product" style="width:100%" editable="true">
+		
+		<p:ajax event="rowEdit" listener="#{productListBean.updateProduct}"/>
+		
+		<p:column headerText="Product Name">
+			<p:cellEditor >
+				<f:facet name="output">
+					<h:outputText value="#{product.name}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText value="#{product.name}"/>
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		<p:column headerText="Brand">
+			<p:cellEditor >
+				<f:facet name="output">
+					<h:outputText value="#{product.brand}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText value="#{product.brand}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		<p:column headerText="Price($)">
+			<p:cellEditor >
+				<f:facet name="output">
+					<h:outputText value="#{product.price}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText value="#{product.price}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		<p:column headerText="Description">
+			<p:cellEditor >
+				<f:facet name="output">
+					<h:outputText value="#{product.description}" />
+				</f:facet>
+				<f:facet name="input">
+					<h:inputText value="#{product.description}" />
+				</f:facet>
+			</p:cellEditor>
+		</p:column>
+		  <p:column headerText="Update Product"  rendered="#{userBean.loggedIn}">
+         <p:link  href="updateProduct.xhtml?productId=#{product.id}">Update Product</p:link>
+         </p:column> 
+		
+		<p:column headerText="Edit Product" rendered="#{userBean.loggedIn}">
+        	<p:rowEditor editTitle="Update Product" cancelTitle="Cancel Update" saveTitle="Save Update"/>
+        </p:column> 
+        <p:column headerText="Delete">
+             <p:commandButton action="#{productListBean.deleteProduct(product.id)}" value="Delete"/>
+        </p:column>
+	</p:dataTable>
+
+</h:form><br></br>
+
+<a href="categoryList.xhtml">Go to Category List Page</a>
+
+
+</body> 
+</html>

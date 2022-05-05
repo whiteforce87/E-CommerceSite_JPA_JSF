@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head> 
+<body> 
+
+<h:form>
+
+<div class="card">
+        <h2>LogIn Page (Hint: admin/123456)</h2>
+        <div class="p-field p-grid">
+            <div class="p-col">
+                <p:outputLabel for="userName" styleClass="p-col-fixed" style="width:100px"  value="User Name"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="userName" value="#{userBean.userName}" required="true" requiredMessage="Enter a valid username"/>
+                </div>
+            </div>
+            <div class="p-col">
+                <p:outputLabel for="password" styleClass="p-col-fixed" style="width:100px"  value="Password"/>
+                <div class="p-col-12 p-md-10">
+                    <p:inputText id="password" value="#{userBean.password}" required="true" requiredMessage="Enter a valid password"/>
+                </div>
+            </div>
+            <h5>Please enter a valid username/Password</h5>
+            <p:commandButton action="#{userBean.logIn()}" value="LogIn"></p:commandButton>
+           
+        </div>
+        <h:messages />
+</div>
+ 
+</h:form>
+</body> 
+</html>
